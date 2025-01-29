@@ -5,13 +5,13 @@ import {
     MapPinIcon,
     EnvelopeIcon,
 } from '@heroicons/react/24/outline'
-import Button from '@/components/common/Button'
+import Button from '../common/Button';
 
 interface FormData {
-    name: string
-    email: string
-    phone: string
-    message: string
+    "entry.1779819228": string; // Name
+    "entry.1176124867": string; // Email
+    "entry.1515023517": string; // Phone
+    "entry.2065683546": string;  // Message
 }
 
 const socialLinks = [
@@ -47,38 +47,86 @@ const socialLinks = [
 
 export default function Contact() {
     const sectionRef = useRef<HTMLDivElement>(null)
+    const formRef = useRef<HTMLFormElement>(null)
+    const iframeRef = useRef<HTMLIFrameElement>(null)
+
     const isVisible = useIntersectionObserver(sectionRef, {
         threshold: 0.1,
         freezeOnceVisible: true
     })
 
     const [formData, setFormData] = useState<FormData>({
-        name: '',
-        email: '',
-        phone: '',
-        message: ''
+        "entry.1779819228": "", // Name
+        "entry.1176124867": "", // Email
+        "entry.1515023517": "", // Phone
+        "entry.2065683546": "",  // Message
     })
 
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        setIsSubmitting(true)
-        setStatus('idle')
+    const validateForm = () => {
+        // Email validation
+        const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if (!emailRegex.test(formData["entry.1176124867"])) {
+            alert("Please enter a valid email address!");
+            return false;
+        }
+
+        // Phone validation
+        const phoneRegex = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+        if (!phoneRegex.test(formData["entry.1515023517"])) {
+            alert("Please enter a valid phone number!");
+            return false;
+        }
+
+        return true;
+    }
+
+    const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+
+        if (!validateForm()) return;
+
+        setIsSubmitting(true);
+        setStatus('idle');
 
         try {
-            // Add your form submission logic here
-            await new Promise(resolve => setTimeout(resolve, 1000)) // Simulated API call
-            setStatus('success')
-            setFormData({ name: '', email: '', phone: '', message: '' })
+            // Open a small pop-up window to submit the form without redirecting the main page
+            const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeypuPKRIHSTzqObfjIqB4xSl4I5yb2yJlAdyCOnCV7sgOzkA/formResponse";
+
+            const formDataEncoded = new URLSearchParams();
+            Object.entries(formData).forEach(([key, value]) => {
+                formDataEncoded.append(key, value);
+            });
+
+            const submitWindow = window.open(
+                `${formUrl}?${formDataEncoded.toString()}`,
+                "_blank",
+                "width=500,height=500"
+            );
+
+            // Close the window after 2 seconds
+            setTimeout(() => {
+                if (submitWindow) {
+                    submitWindow.close();
+                }
+                setStatus('success');
+                setFormData({
+                    "entry.1779819228": "",
+                    "entry.1176124867": "",
+                    "entry.1515023517": "",
+                    "entry.2065683546": "",
+                });
+            }, 2000);
+
         } catch (error) {
-            console.error('Error submitting form:', error)
-            setStatus('error')
+            console.error('Error submitting form:', error);
+            setStatus('error');
         } finally {
-            setIsSubmitting(false)
+            setIsSubmitting(false);
         }
-    }
+    };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target
@@ -118,7 +166,7 @@ export default function Contact() {
                         transition={{ duration: 0.6 }}
                         className="space-y-8"
                     >
-                        <div className="bg-white p-6 shadow-soft hover:shadow-medium transition-shadow">
+                        <div className="bg-white p-6 shadow-soft hover:shadow-medium transition-shadow rounded-lg">
                             <div className="flex items-start space-x-4">
                                 <MapPinIcon className="w-6 h-6 text-primary flex-shrink-0" />
                                 <div>
@@ -128,7 +176,7 @@ export default function Contact() {
                             </div>
                         </div>
 
-                        <div className="bg-white p-6 shadow-soft hover:shadow-medium transition-shadow">
+                        <div className="bg-white p-6 shadow-soft hover:shadow-medium transition-shadow rounded-lg">
                             <div className="flex items-start space-x-4">
                                 <EnvelopeIcon className="w-6 h-6 text-primary flex-shrink-0" />
                                 <div>
@@ -152,8 +200,8 @@ export default function Contact() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="p-3 bg-white shadow-soft hover:shadow-medium 
-                           text-dark-lighter hover:text-primary 
-                           transition-all duration-300"
+                                    text-dark-lighter hover:text-primary 
+                                    transition-all duration-300 rounded-lg"
                                     aria-label={social.name}
                                 >
                                     {social.icon}
@@ -167,84 +215,83 @@ export default function Contact() {
                         initial={{ opacity: 0, x: 20 }}
                         animate={isVisible ? { opacity: 1, x: 0 } : {}}
                         transition={{ duration: 0.6 }}
-                        className="bg-white p-8 shadow-soft"
+                        className="bg-white p-8 shadow-soft rounded-lg"
                     >
-                        <form onSubmit={handleSubmit} className="space-y-6">
+                        <form
+                            ref={formRef}
+                            action="https://docs.google.com/forms/d/e/1FAIpQLSeypuPKRIHSTzqObfjIqB4xSl4I5yb2yJlAdyCOnCV7sgOzkA/formResponse"
+                            method="POST"
+                            className="space-y-6"
+                        >
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                 <div>
-                                    <label htmlFor="name" className="sr-only">Name</label>
+                                    <label htmlFor="entry.1779819228" className="sr-only">Name</label>
                                     <input
-                                        id="name"
+                                        id="entry.1779819228"
                                         type="text"
-                                        name="name"
-                                        value={formData.name}
+                                        name="entry.1779819228"
+                                        value={formData["entry.1779819228"]}
                                         onChange={handleChange}
                                         placeholder="Your Name"
                                         required
                                         className="w-full px-4 py-3 border border-gray-200 
-                             focus:border-primary focus:ring-1 focus:ring-primary
-                             text-dark placeholder-dark-lighter"
+                                        focus:border-primary focus:ring-1 focus:ring-primary
+                                        text-dark placeholder-dark-lighter rounded-lg"
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="email" className="sr-only">Email</label>
+                                    <label htmlFor="entry.1176124867" className="sr-only">Email</label>
                                     <input
-                                        id="email"
+                                        id="entry.1176124867"
                                         type="email"
-                                        name="email"
-                                        value={formData.email}
+                                        name="entry.1176124867"
+                                        value={formData["entry.1176124867"]}
                                         onChange={handleChange}
                                         placeholder="Email Address"
                                         required
                                         className="w-full px-4 py-3 border border-gray-200
-                             focus:border-primary focus:ring-1 focus:ring-primary
-                             text-dark placeholder-dark-lighter"
+                                        focus:border-primary focus:ring-1 focus:ring-primary
+                                        text-dark placeholder-dark-lighter rounded-lg"
                                     />
                                 </div>
                             </div>
 
                             <div>
-                                <label htmlFor="phone" className="sr-only">Phone</label>
+                                <label htmlFor="entry.1515023517" className="sr-only">Phone</label>
                                 <input
-                                    id="phone"
+                                    id="entry.1515023517"
                                     type="tel"
-                                    name="phone"
-                                    value={formData.phone}
+                                    name="entry.1515023517"
+                                    value={formData["entry.1515023517"]}
                                     onChange={handleChange}
                                     placeholder="Phone Number"
+                                    required
                                     className="w-full px-4 py-3 border border-gray-200
-                           focus:border-primary focus:ring-1 focus:ring-primary
-                           text-dark placeholder-dark-lighter"
+                                    focus:border-primary focus:ring-1 focus:ring-primary
+                                    text-dark placeholder-dark-lighter rounded-lg"
                                 />
                             </div>
 
                             <div>
-                                <label htmlFor="message" className="sr-only">Message</label>
+                                <label htmlFor="entry.2065683546" className="sr-only">Message</label>
                                 <textarea
-                                    id="message"
-                                    name="message"
-                                    value={formData.message}
+                                    id="entry.2065683546"
+                                    name="entry.2065683546"
+                                    value={formData["entry.2065683546"]}
                                     onChange={handleChange}
                                     placeholder="Your Message"
                                     required
                                     rows={6}
                                     className="w-full px-4 py-3 border border-gray-200
-                           focus:border-primary focus:ring-1 focus:ring-primary
-                           text-dark placeholder-dark-lighter"
+                                    focus:border-primary focus:ring-1 focus:ring-primary
+                                    text-dark placeholder-dark-lighter rounded-lg"
                                 />
                             </div>
 
-                            <div>
-                                <Button
-                                    type="submit"
-                                    disabled={isSubmitting}
-                                    className="w-full"
-                                >
-                                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                                </Button>
-                            </div>
+                            <Button type="button" onClick={handleSubmit} disabled={isSubmitting} className="w-full">
+                                {isSubmitting ? 'Sending...' : 'Send Message'}
+                            </Button>
 
-                            {/* Status Messages */}
                             {status === 'success' && (
                                 <div className="text-green-600 text-center">
                                     Message sent successfully!
