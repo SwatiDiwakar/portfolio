@@ -69,6 +69,16 @@ const pdfFiles: PDFFile[] = [
         title: 'Teacher Training',
         url: '/assets/documents/Teacher.pdf',
         category: 'curriculum'
+    },
+    {
+        title: 'Activity Sheet',
+        url: '/assets/documents/Activity_Sheet.pdf',
+        category: 'curriculum'
+    },
+    {
+        title: 'Activity Booklet',
+        url: '/assets/documents/Activity_Booklet.pdf',
+        category: 'curriculum'
     }
 ]
 
@@ -194,13 +204,13 @@ export default function Portfolio() {
 
                 {/* PDF Downloads Grid */}
                 {filteredPdfs.length > 0 && (
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center text-center">
                         {filteredPdfs.map((pdf) => (
                             <button
                                 key={pdf.title}
                                 onClick={() => setSelectedPdf(pdf)}
                                 className="bg-primary text-white font-sans hover:bg-primary-dark rounded-xl
-                                             transition-colors duration-300 py-3 px-6 text-center"
+                            transition-colors duration-300 py-3 px-6 text-center"
                             >
                                 {pdf.title}
                             </button>
