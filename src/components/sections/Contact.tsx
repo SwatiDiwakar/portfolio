@@ -48,7 +48,6 @@ const socialLinks = [
 export default function Contact() {
     const sectionRef = useRef<HTMLDivElement>(null)
     const formRef = useRef<HTMLFormElement>(null)
-    const iframeRef = useRef<HTMLIFrameElement>(null)
 
     const isVisible = useIntersectionObserver(sectionRef, {
         threshold: 0.1,
