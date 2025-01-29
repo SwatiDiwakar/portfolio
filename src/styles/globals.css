@@ -1,0 +1,279 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth antialiased;
+  }
+  
+  body {
+    @apply font-sans text-dark-lighter leading-relaxed text-base;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-dark font-semibold;
+  }
+
+  /* Typography Scale */
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl leading-tight;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl lg:text-4xl leading-snug;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl lg:text-3xl leading-snug;
+  }
+
+  h5 {
+    @apply text-lg md:text-xl lg:text-2xl;
+  }
+
+  h6 {
+    @apply text-base md:text-lg lg:text-xl;
+  }
+
+  p {
+    @apply mb-6 last:mb-0;
+  }
+
+  a {
+    @apply text-primary transition-colors duration-200;
+  }
+
+  a:hover {
+    @apply text-primary-dark;
+  }
+}
+
+@layer components {
+  /* Section Styles */
+  .section {
+    @apply py-12 md:py-16 lg:py-24;
+  }
+
+  .section-sm {
+    @apply py-8 md:py-12 lg:py-16;
+  }
+
+  .section-lg {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  /* Container Styles */
+  .container-custom {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Button Styles */
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded
+           font-semibold text-sm uppercase tracking-wider
+           transition-all duration-300 ease-in-out;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary text-white hover:bg-primary-dark;
+  }
+
+  .btn-secondary {
+    @apply btn bg-secondary text-dark hover:bg-secondary-dark;
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-primary text-primary 
+           hover:bg-primary hover:text-white;
+  }
+
+  .btn-light {
+    @apply btn border-2 border-white text-white 
+           hover:bg-white hover:text-primary;
+  }
+
+  /* Card Styles */
+  .card {
+    @apply bg-white shadow-soft transition-shadow duration-300 
+           hover:shadow-medium;
+  }
+
+  .card-body {
+    @apply p-6 md:p-8;
+  }
+
+  /* Form Styles */
+  .form-input {
+    @apply w-full px-4 py-3 border border-light-darker 
+           focus:border-primary focus:ring-1 focus:ring-primary
+           text-dark placeholder-dark-lighter;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-dark mb-2;
+  }
+
+  /* Icon Styles */
+  .icon-container {
+    @apply w-16 h-16 rounded-full border-2 border-primary text-primary
+           flex items-center justify-center text-2xl
+           transition-all duration-300
+           group-hover:bg-primary group-hover:text-white;
+  }
+
+  /* Navigation Styles */
+  .nav-link {
+    @apply text-dark-light hover:text-primary transition-colors duration-200;
+  }
+
+  .nav-link-active {
+    @apply text-primary;
+  }
+}
+
+/* Custom Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Utilities */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .center-absolute {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .grid-auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .aspect-video {
+    aspect-ratio: 16 / 9;
+  }
+  
+  .aspect-square {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+/* Media Query Breakpoints Guide */
+/*
+  xs: 320px  - Small phones
+  sm: 375px  - Modern phones
+  md: 768px  - Tablets
+  lg: 1024px - Laptops/Small Desktops
+  xl: 1280px - Desktops
+  2xl: 1536px - Large Desktops
+  3xl: 1920px - Extra Large Screens
+
+  Usage Examples:
+  sm:text-base     -> 375px and up
+  md:text-lg      -> 768px and up
+  lg:text-xl      -> 1024px and up
+  xl:text-2xl     -> 1280px and up
+  2xl:text-3xl    -> 1536px and up
+  3xl:text-4xl    -> 1920px and up
+*/
+
+/* Screen-Specific Styles */
+@screen xs {
+  .hero-title {
+    @apply text-4xl;
+  }
+  .section-title {
+    @apply text-2xl;
+  }
+}
+
+@screen sm {
+  .hero-title {
+    @apply text-5xl;
+  }
+  .section-title {
+    @apply text-3xl;
+  }
+}
+
+@screen md {
+  .hero-title {
+    @apply text-6xl;
+  }
+  .section-title {
+    @apply text-4xl;
+  }
+}
+
+@screen lg {
+  .hero-title {
+    @apply text-7xl;
+  }
+  .section-title {
+    @apply text-5xl;
+  }
+}
+
+@screen xl {
+  .hero-title {
+    @apply text-8xl;
+  }
+  .section-title {
+    @apply text-6xl;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none;
+  }
+  
+  .print-break-inside {
+    break-inside: avoid;
+  }
+  
+  .print-break-before {
+    break-before: page;
+  }
+}

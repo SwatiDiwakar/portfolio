@@ -1,0 +1,128 @@
+.pdfContainer {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.pdfContent {
+    background-color: white;
+    border-radius: 0.5rem;
+    max-width: 64rem;
+    width: 100%;
+    position: relative;
+    margin: 2rem auto;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: white;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.closeButton {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 9999px;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+    transition: all 0.2s;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.closeButton:hover {
+    color: #374151;
+    background-color: #f9fafb;
+    border-color: #d1d5db;
+}
+
+.pdfWrapper {
+    padding: 1.5rem;
+    background-color: #f3f4f6;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loadingSpinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    width: 100%;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background-color: white;
+    border-top: 1px solid #e5e7eb;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+}
+
+.navButtons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.navButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 9999px;
+    transition: all 0.2s;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    color: #4b5563;
+}
+
+.navButton:not(:disabled):hover {
+    background-color: #f9fafb;
+    border-color: #d1d5db;
+    color: #111827;
+}
+
+.navButton:disabled {
+    color: #9ca3af;
+    background-color: #f3f4f6;
+    cursor: not-allowed;
+    border-color: #e5e7eb;
+}
+
+.pageInfo {
+    font-size: 0.875rem;
+    color: #4b5563;
+    font-weight: 500;
+}
