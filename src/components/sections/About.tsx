@@ -26,7 +26,7 @@ export default function About() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-3xl sm:text-4xl font-bold relative inline-block">
-                        A little <span className="text-primary">about</span> me
+                        Get to <span className="text-primary">know</span> me
                         <motion.span
                             initial={{ width: 0 }}
                             animate={isVisible ? { width: '100%' } : {}}
@@ -37,7 +37,7 @@ export default function About() {
                 </motion.div>
 
                 {/* Content */}
-                <div className="max-w-3xl mx-auto">
+                <div className="max-w-4xl mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={isVisible ? { opacity: 1, y: 0 } : {}}
@@ -64,10 +64,10 @@ export default function About() {
                         >
                             <Button
                                 href="/assets/documents/Swati_CV.pdf"
-                                variant="outline"
-                                icon={<ArrowDownTrayIcon className="w-5 h-5" />}
+                                variant="outline" className='text-xs lg:text-base rounded-2xl'
+                                icon={<ArrowDownTrayIcon className="w-5 h-5 rounded" />}
                             >
-                                Download CV
+                                Discover my experience
                             </Button>
                         </motion.div>
                     </motion.div>
@@ -80,15 +80,15 @@ export default function About() {
                     transition={{ duration: 0.6, delay: 0.6 }}
                     className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16"
                 >
-                    <div className="text-center p-6 bg-white shadow-soft hover:shadow-medium transition-shadow">
+                    <div className="text-center p-6 bg-white shadow-soft hover:shadow-medium transition-shadow rounded-xl">
                         <h3 className="text-4xl font-bold text-primary mb-2">10+</h3>
                         <p className="text-dark-lighter">Years Experience</p>
                     </div>
-                    <div className="text-center p-6 bg-white shadow-soft hover:shadow-medium transition-shadow">
+                    <div className="text-center p-6 bg-white shadow-soft hover:shadow-medium transition-shadow rounded-xl">
                         <h3 className="text-4xl font-bold text-primary mb-2">50+</h3>
                         <p className="text-dark-lighter">Projects Completed</p>
                     </div>
-                    <div className="text-center p-6 bg-white shadow-soft hover:shadow-medium transition-shadow">
+                    <div className="text-center p-6 bg-white shadow-soft hover:shadow-medium transition-shadow rounded-xl">
                         <h3 className="text-4xl font-bold text-primary mb-2">3</h3>
                         <p className="text-dark-lighter">International Awards</p>
                     </div>

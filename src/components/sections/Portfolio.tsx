@@ -27,7 +27,7 @@ const portfolioItems: PortfolioItem[] = [
         id: '1',
         title: 'Marketing Video for Peecee Compute Kit',
         category: 'video',
-        imageUrl: '/images/video-1-thumb.png',
+        imageUrl: '/images/video-1-thumb.jpg',
         videoUrl: 'https://www.youtube.com/embed/Hq72ZbaYmG0?autoplay=1&mute=1&loop=1&playlist=Hq72ZbaYmG0&origin=http://localhost:3000',
         description: 'See innovation in action! This dynamic marketing video captures the essence of Peecee Compute Kit, demonstrating how it empowers young creators to bring their ideas to life.'
     },
@@ -35,7 +35,7 @@ const portfolioItems: PortfolioItem[] = [
         id: '2',
         title: 'Curriculum Video for Peecee',
         category: 'video',
-        imageUrl: '/images/video-2-thumb.png',
+        imageUrl: '/images/video-2-thumb.jpg',
         videoUrl: 'https://www.youtube.com/embed/LpGjhI43S8I?autoplay=1&mute=1&loop=1&playlist=LpGjhI43S8I&origin=http://localhost:3000',
         description: 'Transforming learning, one project at a time! This curriculum video showcases how Peecee bridges the gap between theory and hands-on learning.'
     },
@@ -43,7 +43,7 @@ const portfolioItems: PortfolioItem[] = [
         id: '3',
         title: 'MakerSpace Introduction Video',
         category: 'video',
-        imageUrl: '/images/video-3-thumb.png',
+        imageUrl: '/images/video-3-thumb.jpg',
         videoUrl: 'https://www.youtube.com/embed/U6tWN4cubIE?autoplay=1&mute=1&loop=1&playlist=U6tWN4cubIE&origin=http://localhost:3000',
         description: 'Where creativity meets collaboration! This MakerSpace video is a glimpse into how we design spaces that foster innovation and teamwork.'
     }
@@ -170,7 +170,7 @@ export default function Portfolio() {
                                 animate={isVisible ? { opacity: 1, y: 0 } : {}}
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
                                 className="group relative bg-white shadow-soft hover:shadow-medium 
-                                 transition-all duration-300 rounded-2xl"
+                                        transition-all duration-300 rounded-2xl"
                             >
                                 {/* Portfolio Item Image */}
                                 <div className="relative aspect-video overflow-hidden rounded-2xl">
@@ -182,21 +182,22 @@ export default function Portfolio() {
                                     />
                                     {/* Overlay */}
                                     <div className="absolute inset-0 bg-primary bg-opacity-0 group-hover:bg-opacity-90 
-                                      transition-all duration-300 flex items-center justify-center">
+                                                transition-all duration-300 flex items-center justify-center">
                                         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 
-                                        text-white text-center p-4">
-                                            <h3 className="text-2xl font-sans-bold mb-2">{item.title}</h3>
-                                            <p className="mb-4 font-display">{item.description}</p>
+                                                    text-white text-center p-4">
+                                            <p className="mb-4 font-display text-xs lg:text-base">{item.description}</p>
                                             <Button
                                                 variant="light"
                                                 onClick={() => setSelectedItem(item)}
-                                                className='font-sans text-xl'
+                                                className='font-sans text-xs lg:text-base rounded-xl'
                                             >
                                                 View Details
                                             </Button>
                                         </div>
                                     </div>
                                 </div>
+                                {/* Portfolio Item Title (Moved Below the Image) */}
+                                <h3 className="text-lg font-semibold text-center mt-4 mb-4">{item.title}</h3>
                             </motion.div>
                         ))}
                     </motion.div>

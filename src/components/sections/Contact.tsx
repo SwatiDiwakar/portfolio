@@ -190,7 +190,7 @@ export default function Contact() {
                         </div>
 
                         {/* Social Links */}
-                        <div className="flex space-x-4 pt-4">
+                        <div className="flex flex-wrap justify-center space-x-4 pt-4">
                             {socialLinks.map(social => (
                                 <a
                                     key={social.name}
@@ -198,8 +198,8 @@ export default function Contact() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="p-3 bg-white shadow-soft hover:shadow-medium 
-                                    text-dark-lighter hover:text-primary 
-                                    transition-all duration-300 rounded-lg"
+            text-dark-lighter hover:text-primary 
+            transition-all duration-300 rounded-lg"
                                     aria-label={social.name}
                                 >
                                     {social.icon}
@@ -286,7 +286,7 @@ export default function Contact() {
                                 />
                             </div>
 
-                            <Button type="button" onClick={handleSubmit} disabled={isSubmitting} className="w-full">
+                            <Button type="button" onClick={handleSubmit} disabled={isSubmitting} className="w-full rounded-xl">
                                 {isSubmitting ? 'Sending...' : 'Send Message'}
                             </Button>
 

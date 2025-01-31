@@ -52,12 +52,12 @@ export default function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={isVisible ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.8, delay: 0.4 }}
-                            className="mt-8 space-x-4"
+                            className="mt-8 space-x-4 gap-4"
                         >
-                            <Button href="#about" variant="primary">
+                            <Button href="#about" variant="primary" className='rounded-xl justify-center'>
                                 Let&apos;s Collaborate
                             </Button>
-                            <Button href="#portfolio" variant="outline">
+                            <Button href="#portfolio" variant="outline" className='rounded-xl justify-center sm:mt-4 md:mt-0'>
                                 View Portfolio
                             </Button>
                         </motion.div>
