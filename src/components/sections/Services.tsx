@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef } from 'react'
-import { color, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import {
     TrophyIcon,
