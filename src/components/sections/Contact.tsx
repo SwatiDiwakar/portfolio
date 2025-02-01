@@ -1,3 +1,5 @@
+"use client"
+
 import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
@@ -136,6 +138,7 @@ export default function Contact() {
             id="contact"
             ref={sectionRef}
             className="py-24 bg-light"
+            suppressHydrationWarning
         >
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Title */}

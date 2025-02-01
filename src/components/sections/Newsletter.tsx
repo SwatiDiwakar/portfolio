@@ -1,3 +1,5 @@
+"use client"
+
 import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
@@ -50,6 +52,7 @@ export default function Newsletter() {
         <section
             ref={sectionRef}
             className="bg-primary"
+            suppressHydrationWarning
         >
             <div className="container-fluid">
                 <div className="grid md:grid-cols-2">

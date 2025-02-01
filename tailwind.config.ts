@@ -87,7 +87,7 @@ module.exports = {
       boxShadow: {
         'soft': '0 2px 15px 0 rgba(0, 0, 0, 0.05)',
         'medium': '0 4px 20px 0 rgba(0, 0, 0, 0.1)',
-        'hard': '0 8px 30px 0 rgba(0, 0, 0, 0.15)',
+        'hard': '0 8px 30px 0 rgba(0, 0, 0, 0.2)',
       },
       zIndex: {
         '-1': '-1',

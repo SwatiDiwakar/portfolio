@@ -1,10 +1,12 @@
+"use client"
+
 import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import Button from '@/components/common/Button'
-import PDFViewer from '@/components/common/PDFViewer'
 import { getImagePath } from '@/utils/helpers'
+import PDFViewer from '@/components/common/PDFViewer'
 
 interface PortfolioItem {
     id: string
@@ -79,10 +81,20 @@ const pdfFiles: PDFFile[] = [
         title: 'Activity Booklet',
         url: '/assets/documents/Activity_Booklet.pdf',
         category: 'curriculum'
+    },
+    {
+        title: 'MakerFaire Runbook',
+        url: '/assets/documents/Runbook_MakerFaire.pdf',
+        category: 'operations'
+    },
+    {
+        title: 'School Sales Training',
+        url: '/assets/documents/School_Sales_Training.pdf',
+        category: 'sales'
     }
 ]
 
-const categories = ['all', 'video', 'design', 'curriculum']
+const categories = ['all', 'video', 'design', 'curriculum', 'operations', 'sales']
 
 export default function Portfolio() {
     const sectionRef = useRef<HTMLDivElement>(null)
@@ -116,6 +128,7 @@ export default function Portfolio() {
             id="portfolio"
             ref={sectionRef}
             className="py-24 bg-light"
+            suppressHydrationWarning
         >
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Title */}
@@ -205,7 +218,7 @@ export default function Portfolio() {
 
                 {/* PDF Downloads Grid */}
                 {filteredPdfs.length > 0 && (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center text-center">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center text-center">
                         {filteredPdfs.map((pdf) => (
                             <button
                                 key={pdf.title}

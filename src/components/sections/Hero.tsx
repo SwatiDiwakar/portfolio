@@ -1,3 +1,5 @@
+"use client"
+
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
@@ -17,6 +19,7 @@ export default function Hero() {
             id="home"
             ref={heroRef}
             className="relative min-h-screen flex items-center bg-light overflow-hidden"
+            suppressHydrationWarning
         >
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 relative z-10">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -32,7 +35,7 @@ export default function Hero() {
                                 S<span className="text-primary">wa</span>ti
                             </span>
                             <span className="block font-light">
-                                Di<span className="text-secondary">wa</span>kar
+                                Di<span className="text-primary">wa</span>kar
                             </span>
                         </h1>
 
@@ -45,7 +48,7 @@ export default function Hero() {
                             Vision to Reality:
                             <br />
                             Innovating Products, Services, & {" "}
-                            <span className="text-secondary font-semibold">Growth</span>
+                            <span className="text-primary font-semibold">Growth</span>
                         </motion.h3>
 
                         <motion.div
@@ -54,7 +57,7 @@ export default function Hero() {
                             transition={{ duration: 0.8, delay: 0.4 }}
                             className="mt-8 space-x-4 gap-4"
                         >
-                            <Button href="#about" variant="primary" className='rounded-xl justify-center'>
+                            <Button href="#contact" variant="primary" className='rounded-xl justify-center'>
                                 Let&apos;s Collaborate
                             </Button>
                             <Button href="#portfolio" variant="outline" className='rounded-xl justify-center sm:mt-4 md:mt-0'>

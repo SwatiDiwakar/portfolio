@@ -1,5 +1,7 @@
+"use client"
+
 import { useRef } from 'react'
-import { motion } from 'framer-motion'
+import { color, motion } from 'framer-motion'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import {
     TrophyIcon,
@@ -24,7 +26,7 @@ const services = [
     },
     {
         icon: <AcademicCapIcon className="w-12 h-12" />,
-        title: "Master Trainer for Teachers and Leadership Development",
+        title: "Mentors of Tomorrow, Trained Today",
         description: "Empowering educators and school leaders to drive meaningful change through innovative teaching methodologies.",
         items: [
             "Training teachers in innovative methodologies",
@@ -44,7 +46,7 @@ const services = [
     },
     {
         icon: <ChartBarIcon className="w-12 h-12" />,
-        title: "Strategic Process and Operations Leadership",
+        title: "Chaos to Clarity: Streamlining Success",
         description: "Designing and implementing processes that streamline operations and foster collaboration.",
         items: [
             "30% reduction in delivery timelines",
@@ -59,7 +61,12 @@ const services = [
         items: [
             "Developing interactive learning platforms",
             "Creating user-friendly UI/UX designs",
-            "Ensuring seamless functionality"
+            "Ensuring seamless functionality",
+        ],
+        links: [
+            { name: "Yudu Robotics", url: "https://yudurobotics.com" },
+            { name: "TinkerBunker", url: "https://www.tinkerbunker.com" },
+            { name: "HackberryKids", url: "https://www.hackberrykids.com" }
         ]
     },
     {
@@ -86,6 +93,7 @@ export default function Services() {
             id="services"
             ref={sectionRef}
             className="py-24 bg-white"
+            suppressHydrationWarning
         >
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Title */}
@@ -96,7 +104,7 @@ export default function Services() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-3xl sm:text-4xl font-bold relative inline-block">
-                        I do <span className="text-primary">amazing</span> things for clients
+                        Check out my <span className="text-primary">Impactful solutions</span> that drive success
                         <motion.span
                             initial={{ width: 0 }}
                             animate={isVisible ? { width: '100%' } : {}}
@@ -141,6 +149,24 @@ export default function Services() {
                                     </li>
                                 ))}
                             </ul>
+                            {service.links && (
+                                <p className="mt-4 text-dark-lighter">
+                                    Here are a few websites to showcase my work:{" "}
+                                    {service.links.map((link, i) => (
+                                        <span key={i}>
+                                            <a
+                                                href={link.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-primary"
+                                            >
+                                                {link.name}
+                                            </a>
+                                            {i !== service.links.length - 1 && ", "}
+                                        </span>
+                                    ))}
+                                </p>
+                            )}
                         </motion.div>
                     ))}
                 </div>
