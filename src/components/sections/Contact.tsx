@@ -149,7 +149,7 @@ export default function Contact() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-3xl sm:text-4xl font-bold relative inline-block">
-                    Let's connect to <span className="text-primary">create something amazing</span> together
+                    Let&apos;s connect to <span className="text-primary">create something amazing</span> together
                         <motion.span
                             initial={{ width: 0 }}
                             animate={isVisible ? { width: '100%' } : {}}
