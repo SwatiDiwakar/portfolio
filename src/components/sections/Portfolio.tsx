@@ -200,7 +200,7 @@ export default function Portfolio() {
                                                     text-white text-center p-4">
                                             <p className="mb-4 font-display text-xs lg:text-base">{item.description}</p>
                                             <Button
-                                                variant="light"
+                                                variant="accent1"
                                                 onClick={() => setSelectedItem(item)}
                                                 className='font-sans text-xs lg:text-base rounded-xl'
                                             >
