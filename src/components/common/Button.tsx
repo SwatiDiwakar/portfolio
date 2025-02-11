@@ -2,7 +2,7 @@ import { ReactNode, ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react'
 import Link, { LinkProps } from 'next/link'
 import { cn } from '@/utils/cn'
 
-type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'light';
+type ButtonVariant = 'primary' | 'accent1' | 'accent2' | 'outline';
 type ButtonSize = 'sm' | 'md' | 'lg';
 type ButtonType = 'button' | 'submit' | 'reset';
 
@@ -31,19 +31,19 @@ interface AnchorProps extends
     href: string
 }
 
-const baseStyles = "inline-flex items-center justify-center font-semibold tracking-wider transition-all duration-300"
+const baseStyles = "inline-flex items-center justify-center font-display font-semibold tracking-wider transition-all duration-300"
 
 const variantStyles: Record<ButtonVariant, string> = {
-    primary: "bg-primary text-white hover:bg-primary-dark",
-    secondary: "bg-secondary text-dark hover:bg-secondary-dark",
-    outline: "border-2 border-primary text-primary hover:bg-primary hover:text-white",
-    light: "border-2 border-white text-white hover:bg-white hover:text-primary"
+    primary: "bg-primary text-white hover:bg-primary-dark shadow-md hover:shadow-lg",
+    accent1: "bg-accent1 text-white hover:bg-accent1-dark shadow-md hover:shadow-lg",
+    accent2: "bg-accent2 text-dark hover:bg-accent2-dark shadow-md hover:shadow-lg",
+    outline: "border-2 border-primary text-primary hover:bg-primary hover:text-white shadow-sm hover:shadow-md"
 }
 
 const sizeStyles: Record<ButtonSize, string> = {
-    sm: "px-4 py-2 text-sm",
-    md: "px-6 py-3 text-base",
-    lg: "px-8 py-4 text-lg"
+    sm: "px-4 py-2 text-sm rounded-lg",
+    md: "px-6 py-3 text-base rounded-xl",
+    lg: "px-8 py-4 text-lg rounded-2xl"
 }
 
 const Button = ({
@@ -53,7 +53,6 @@ const Button = ({
     icon,
     children,
     className,
-    //type = 'button',
     ...props
 }: ButtonProps | AnchorProps) => {
     const combinedClassName = cn(
@@ -65,7 +64,7 @@ const Button = ({
     )
 
     const iconElement = icon && (
-        <span className="mr-2">{icon}</span>
+        <span className="mr-2 flex items-center">{icon}</span>
     )
 
     if ('href' in props) {
@@ -82,8 +81,7 @@ const Button = ({
         )
     }
 
-    const { type: buttonType = 'button'} = props as ButtonProps
-
+    const { type: buttonType = 'button' } = props as ButtonProps
 
     return (
         <button

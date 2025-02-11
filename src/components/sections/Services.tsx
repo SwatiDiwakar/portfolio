@@ -135,7 +135,7 @@ export default function Services() {
                             </div>
 
                             {/* Content */}
-                            <h3 className="text-xl font-bold mb-4 text-dark">
+                            <h3 className="font-serif text-xl font-bold mb-4 text-dark">
                                 {service.title}
                             </h3>
                             <p className="text-dark-lighter mb-6">

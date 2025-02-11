@@ -1,4 +1,4 @@
-import { Montserrat, Fira_Sans } from 'next/font/google'
+import { Roboto_Flex, Playfair_Display, Josefin_Sans } from 'next/font/google'
 import Navbar from '@/components/layout/NavBar'
 import Footer from '@/components/layout/Footer'
 import PreLoader from '@/components/common/PreLoader'
@@ -7,16 +7,29 @@ import { metadata } from './metadata'
 import { viewport } from './viewport'
 import '@/styles/globals.css'
 
-const montserrat = Montserrat({
+const robotoFlex = Roboto_Flex({
   subsets: ['latin'],
-  variable: '--font-montserrat',
+  variable: '--font-roboto-flex',
   display: 'swap',
 })
 
-const firaSans = Fira_Sans({
-  weight: ['400', '500', '600', '700'],
+/* const grandstander = Grandstander({
   subsets: ['latin'],
-  variable: '--font-fira-sans',
+  variable: '--font-grandstander',
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+}) */
+
+const josefinSans = Josefin_Sans({
+  subsets: ['latin'],
+  variable: '--font-grandstander',
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+})
+
+const playfairDisplay = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair-display',
   display: 'swap',
 })
 
@@ -30,7 +43,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${montserrat.variable} ${firaSans.variable}`}
+      className={`${robotoFlex.variable} ${josefinSans.variable} ${playfairDisplay.variable}`}
     >
       <body className="flex min-h-screen flex-col">
         <PreLoader />

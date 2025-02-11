@@ -30,12 +30,12 @@ export default function Hero() {
                         transition={{ duration: 0.8, ease: "easeOut" }}
                         className="text-center lg:text-left"
                     >
-                        <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-tight">
+                        <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-tight">
                             <span className="block">
-                                S<span className="text-primary">wa</span>ti
+                                S<span className="font-serif text-primary">wa</span>ti
                             </span>
                             <span className="block font-light">
-                                Di<span className="text-primary">wa</span>kar
+                                Di<span className="font-serif text-primary">wa</span>kar
                             </span>
                         </h1>
 
@@ -43,12 +43,12 @@ export default function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={isVisible ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.8, delay: 0.2 }}
-                            className="mt-6 text-xl sm:text-2xl text-dark-lighter leading-relaxed"
+                            className="font-sans mt-6 text-xl sm:text-2xl text-dark-lighter leading-relaxed"
                         >
                             Vision to Reality:
                             <br />
                             Innovating Products, Services, & {" "}
-                            <span className="text-primary font-semibold">Growth</span>
+                            <span className="font-sans text-primary font-semibold">Growth</span>
                         </motion.h3>
 
                         <motion.div
@@ -57,10 +57,10 @@ export default function Hero() {
                             transition={{ duration: 0.8, delay: 0.4 }}
                             className="mt-8 space-x-4 gap-4"
                         >
-                            <Button href="#contact" variant="primary" className='rounded-xl justify-center'>
+                            <Button href="#contact" variant="primary" className='font-sans rounded-xl justify-center'>
                                 Let&apos;s Collaborate
                             </Button>
-                            <Button href="#portfolio" variant="outline" className='rounded-xl justify-center sm:mt-4 md:mt-0'>
+                            <Button href="#portfolio" variant="outline" className='font-sans rounded-xl justify-center sm:mt-4 md:mt-0'>
                                 View Portfolio
                             </Button>
                         </motion.div>

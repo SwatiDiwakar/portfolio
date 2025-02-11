@@ -64,7 +64,7 @@ export default function Newsletter() {
                         className="px-4 py-16 sm:px-6 lg:px-8 text-center md:text-left"
                     >
                         <div className="max-w-lg mx-auto md:mx-0">
-                            <h2 className="text-3xl font-bold text-white">
+                            <h2 className="font-serif text-3xl font-bold text-white">
                                 <i className="fa fa-paper-plane mr-2"></i>
                                 Subscribe to the Newsletter Waitlist
                             </h2>
@@ -81,20 +81,23 @@ export default function Newsletter() {
                                         value={formData.email}
                                         onChange={handleChange}
                                         required
-                                        className="w-full px-4 py-3 text-base text-dark placeholder-dark-lighter 
-                            bg-white border-2 border-secondary focus:border-white 
-                            focus:ring-2 focus:ring-white transition-colors"
+                                        className="w-full px-4 py-3 text-base text-dark rounded-lg 
+                                                placeholder-dark-lighter bg-white border-2 
+                                                border-transparent focus:border-accent2 
+                                                focus:ring-2 focus:ring-accent2 transition-colors"
                                         placeholder="Enter your email"
                                     />
                                 </div>
-                                <Button
+                                <button
                                     type="submit"
-                                    variant="secondary"
                                     disabled={isSubmitting}
-                                    className="md:w-auto"
+                                    className="px-6 py-3 bg-accent2 text-dark font-display font-semibold 
+                                             rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 
+                                             hover:bg-accent2-dark disabled:opacity-50 disabled:cursor-not-allowed
+                                             md:w-auto w-full"
                                 >
                                     {isSubmitting ? 'Subscribing...' : 'Subscribe'}
-                                </Button>
+                                </button>
                             </form>
 
                             {/* Status Messages */}
@@ -102,9 +105,9 @@ export default function Newsletter() {
                                 <motion.div
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    className="mt-4 text-secondary"
+                                    className="mt-4 text-accent2 font-medium"
                                 >
-                                    Thank you for subscribing! You`&apos;`ll be notified when we launch.
+                                    Thank you for subscribing! You&apos;ll be notified when we launch.
                                 </motion.div>
                             )}
                             {status === 'error' && (

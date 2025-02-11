@@ -3,19 +3,26 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    color-scheme: light dark;
+  }
+
   html {
     @apply scroll-smooth antialiased;
   }
   
   body {
-    @apply font-sans text-dark-lighter leading-relaxed text-base;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    @apply font-sans text-dark dark:text-darkTheme-text 
+           bg-light dark:bg-darkTheme-bg
+           transition-colors duration-200;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display text-dark font-semibold;
+    @apply font-display text-dark dark:text-darkTheme-text font-semibold;
+  }
+
+  *, *::before, *::after {
+    @apply transition-colors duration-200;
   }
 
   /* Typography Scale */
@@ -44,7 +51,7 @@
   }
 
   p {
-    @apply mb-6 last:mb-0;
+    @apply mb-6 last:mb-0 text-dark;
   }
 
   a {
@@ -77,8 +84,8 @@
 
   /* Button Styles */
   .btn {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded
-           font-semibold text-sm uppercase tracking-wider
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg
+           font-display font-semibold text-sm uppercase tracking-wider
            transition-all duration-300 ease-in-out;
   }
 
@@ -86,8 +93,12 @@
     @apply btn bg-primary text-white hover:bg-primary-dark;
   }
 
-  .btn-secondary {
-    @apply btn bg-secondary text-dark hover:bg-secondary-dark;
+  .btn-accent1 {
+    @apply btn bg-accent1 text-white hover:bg-accent1-dark;
+  }
+
+  .btn-accent2 {
+    @apply btn bg-accent2 text-dark hover:bg-accent2-dark;
   }
 
   .btn-outline {
@@ -95,15 +106,12 @@
            hover:bg-primary hover:text-white;
   }
 
-  .btn-light {
-    @apply btn border-2 border-white text-white 
-           hover:bg-white hover:text-primary;
-  }
-
   /* Card Styles */
   .card {
-    @apply bg-white shadow-soft transition-shadow duration-300 
-           hover:shadow-medium;
+    @apply bg-white dark:bg-darkTheme-surface 
+           shadow-soft dark:shadow-none
+           border border-transparent dark:border-darkTheme-border
+           rounded-xl transition-all duration-300;
   }
 
   .card-body {
@@ -112,8 +120,8 @@
 
   /* Form Styles */
   .form-input {
-    @apply w-full px-4 py-3 border border-light-darker 
-           focus:border-primary focus:ring-1 focus:ring-primary
+    @apply w-full px-4 py-3 rounded-lg border border-light-darker 
+           focus:border-accent1 focus:ring-1 focus:ring-accent1
            text-dark placeholder-dark-lighter;
   }
 
@@ -131,22 +139,51 @@
 
   /* Navigation Styles */
   .nav-link {
-    @apply text-dark-light hover:text-primary transition-colors duration-200;
+    @apply font-display text-dark-light hover:text-primary transition-colors duration-200;
   }
 
   .nav-link-active {
     @apply text-primary;
   }
+
+  .section-header {
+    @apply text-accent1 font-display font-bold text-3xl md:text-4xl mb-6;
+  }
+
+  .highlight {
+    @apply text-primary font-semibold;
+  }
+
+  .accent-text {
+    @apply text-accent1;
+  }
+
+  .input {
+    @apply bg-white dark:bg-darkTheme-surface
+           text-dark dark:text-darkTheme-text
+           border-light-darker dark:border-darkTheme-border
+           focus:border-accent1 dark:focus:border-accent1
+           focus:ring-1 focus:ring-accent1;
+  }
+
+  .bg-alternate {
+    @apply bg-light dark:bg-darkTheme-surface;
+  }
+
+  .bg-primary-section {
+    @apply bg-primary dark:bg-darkTheme-bg;
+  }
+}
+
+/* Dark mode image adjustments */
+.dark img {
+  @apply brightness-90;
 }
 
 /* Custom Animations */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes fadeInUp {

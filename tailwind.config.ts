@@ -19,30 +19,52 @@ module.exports = {
     },
     extend: {
       colors: {
+        // Light theme colors
         primary: {
-          DEFAULT: '#E04343',
-          light: '#e66a6a',
-          dark: '#b33535',
+          DEFAULT: '#FF5555',
+          light: '#FF7777',
+          dark: '#E63939',
         },
-        secondary: {
-          DEFAULT: '#FFE800',
-          light: '#fff133',
-          dark: '#ccba00',
+        accent1: {
+          DEFAULT: '#00C4CC',
+          light: '#1AD6DE',
+          dark: '#00A3AA',
+        },
+        accent2: {
+          DEFAULT: '#F9E900',
+          light: '#FFEF33',
+          dark: '#E6D700',
         },
         dark: {
-          DEFAULT: '#353535',
-          light: '#545454',
-          lighter: '#8c9398',
+          DEFAULT: '#333333',
+          light: '#4A4A4A',
+          lighter: '#666666',
         },
         light: {
-          DEFAULT: '#f3f5f8',
-          dark: '#e9ecf2',
-          darker: '#d8dde6',
+          DEFAULT: '#FFF8E7',
+          dark: '#F5EED9',
+          darker: '#E6D9B8',
+        },
+        // Dark theme colors
+        darkTheme: {
+          bg: '#1A1A1A',
+          surface: '#2A2A2A',
+          surfaceHover: '#3A3A3A',
+          border: '#404040',
+          borderHover: '#505050',
+          text: '#E0E0E0',
+          textSecondary: '#A0A0A0',
+          accent: '#FF5555',
+          accentHover: '#FF7777',
+          highlight: '#00C4CC',
+          card: '#252525',
+          cardHover: '#303030',
         },
       },
       fontFamily: {
-        sans: ['var(--font-montserrat)', ...defaultTheme.fontFamily.sans],
-        display: ['var(--font-fira-sans)', ...defaultTheme.fontFamily.sans],
+        sans: ['var(--font-roboto-flex)', ...defaultTheme.fontFamily.sans],
+        display: ['var(--font-josefin-sans)', ...defaultTheme.fontFamily.sans],
+        serif: ['var(--font-playfair-display)', ...defaultTheme.fontFamily.serif],
       },
       fontSize: {
         'xxs': '0.625rem',      // 10px
@@ -88,6 +110,9 @@ module.exports = {
         'soft': '0 2px 15px 0 rgba(0, 0, 0, 0.05)',
         'medium': '0 4px 20px 0 rgba(0, 0, 0, 0.1)',
         'hard': '0 8px 30px 0 rgba(0, 0, 0, 0.2)',
+        'dark-soft': '0 2px 15px 0 rgba(0, 0, 0, 0.3)',
+        'dark-medium': '0 4px 20px 0 rgba(0, 0, 0, 0.4)',
+        'dark-hard': '0 8px 30px 0 rgba(0, 0, 0, 0.5)',
       },
       zIndex: {
         '-1': '-1',
