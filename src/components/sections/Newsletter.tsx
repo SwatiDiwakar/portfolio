@@ -4,7 +4,6 @@ import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import Image from 'next/image'
-import Button from '@/components/common/Button'
 import { getImagePath } from '@/utils/helpers'
 
 interface NewsletterFormData {

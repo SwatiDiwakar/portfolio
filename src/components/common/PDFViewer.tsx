@@ -84,7 +84,7 @@ export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
     setScale(prev => Math.max(prev - 0.25, minScale))
   }
 
-  const handleDownload = async () => {
+  /* const handleDownload = async () => {
     try {
       const response = await fetch(pdfUrl)
       const blob = await response.blob()
@@ -100,7 +100,7 @@ export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
       console.error('Error downloading PDF:', error)
     }
   }
-
+ */
   return (
     // Overlay with click outside to close
     <div
