@@ -45,21 +45,6 @@ module.exports = {
           dark: '#F5EED9',
           darker: '#E6D9B8',
         },
-        // Dark theme colors
-        darkTheme: {
-          bg: '#1A1A1A',
-          surface: '#2A2A2A',
-          surfaceHover: '#3A3A3A',
-          border: '#404040',
-          borderHover: '#505050',
-          text: '#E0E0E0',
-          textSecondary: '#A0A0A0',
-          accent: '#FF5555',
-          accentHover: '#FF7777',
-          highlight: '#00C4CC',
-          card: '#252525',
-          cardHover: '#303030',
-        },
       },
       fontFamily: {
         sans: ['var(--font-roboto-flex)', ...defaultTheme.fontFamily.sans],

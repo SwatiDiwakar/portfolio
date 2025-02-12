@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    color-scheme: light dark;
+    color-scheme: light;
   }
 
   html {
@@ -12,13 +12,11 @@
   }
   
   body {
-    @apply font-sans text-dark dark:text-darkTheme-text 
-           bg-light dark:bg-darkTheme-bg
-           transition-colors duration-200;
+    @apply font-sans text-dark bg-light transition-colors duration-200;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display text-dark dark:text-darkTheme-text font-semibold;
+    @apply font-display text-dark font-semibold;
   }
 
   *, *::before, *::after {
@@ -108,10 +106,7 @@
 
   /* Card Styles */
   .card {
-    @apply bg-white dark:bg-darkTheme-surface 
-           shadow-soft dark:shadow-none
-           border border-transparent dark:border-darkTheme-border
-           rounded-xl transition-all duration-300;
+    @apply bg-white shadow-soft border border-transparent rounded-xl transition-all duration-300;
   }
 
   .card-body {
@@ -159,19 +154,16 @@
   }
 
   .input {
-    @apply bg-white dark:bg-darkTheme-surface
-           text-dark dark:text-darkTheme-text
-           border-light-darker dark:border-darkTheme-border
-           focus:border-accent1 dark:focus:border-accent1
-           focus:ring-1 focus:ring-accent1;
+    @apply bg-white text-dark border-light-darker 
+           focus:border-accent1 focus:ring-1 focus:ring-accent1;
   }
 
   .bg-alternate {
-    @apply bg-light dark:bg-darkTheme-surface;
+    @apply bg-light;
   }
 
   .bg-primary-section {
-    @apply bg-primary dark:bg-darkTheme-bg;
+    @apply bg-primary;
   }
 }
 

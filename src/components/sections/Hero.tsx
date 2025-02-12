@@ -30,12 +30,12 @@ export default function Hero() {
                         transition={{ duration: 0.8, ease: "easeOut" }}
                         className="text-center lg:text-left"
                     >
-                        <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-tight">
+                        <h1 className="font-sans text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-tight">
                             <span className="block">
-                                S<span className="font-serif text-primary">wa</span>ti
+                                S<span className="text-primary">wa</span>ti
                             </span>
                             <span className="block font-light">
-                                Di<span className="font-serif text-primary">wa</span>kar
+                                Di<span className="text-primary">wa</span>kar
                             </span>
                         </h1>
 
