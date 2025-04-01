@@ -55,12 +55,12 @@ export default function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={isVisible ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.8, delay: 0.4 }}
-                            className="mt-8 space-x-4 gap-4"
+                            className="mt-8 flex flex-col md:flex-row items-center justify-center lg:justify-start gap-4 w-full"
                         >
-                            <Button href="#contact" variant="primary" className='font-sans rounded-xl justify-center'>
+                            <Button href="#contact" variant="primary" className="font-sans rounded-xl w-full md:w-auto text-center">
                                 Let&apos;s Collaborate
                             </Button>
-                            <Button href="#portfolio" variant="outline" className='font-sans rounded-xl justify-center sm:mt-4 md:mt-0'>
+                            <Button href="#portfolio" variant="outline" className="font-sans rounded-xl w-full md:w-auto text-center">
                                 View Portfolio
                             </Button>
                         </motion.div>

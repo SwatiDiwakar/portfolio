@@ -84,11 +84,11 @@ export default function About() {
                     className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16"
                 >
                     <div className="text-center p-6 bg-white shadow-soft hover:shadow-medium transition-shadow rounded-xl">
-                        <h3 className="text-4xl font-bold text-primary mb-2">10+</h3>
+                        <h3 className="text-4xl font-bold text-primary mb-2">15+</h3>
                         <p className="text-dark-lighter">Years Experience</p>
                     </div>
                     <div className="text-center p-6 bg-white shadow-soft hover:shadow-medium transition-shadow rounded-xl">
-                        <h3 className="text-4xl font-bold text-primary mb-2">50+</h3>
+                        <h3 className="text-4xl font-bold text-primary mb-2">100+</h3>
                         <p className="text-dark-lighter">Projects Completed</p>
                     </div>
                     <div className="text-center p-6 bg-white shadow-soft hover:shadow-medium transition-shadow rounded-xl">
