@@ -25,7 +25,8 @@ export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
     //const basePath = process.env.GITHUB_PAGES === 'true' ? '/portfolio' : ''
     pdfjs.GlobalWorkerOptions.workerSrc =
       `/portfolio/scripts/pdf.worker.min.js`;
-  }, []);
+    console.log("PDF URL being loaded:", pdfUrl);
+  }, [pdfUrl]);
 
   useEffect(() => {
     const calculateScale = () => {
