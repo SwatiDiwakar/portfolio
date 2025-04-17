@@ -5,7 +5,6 @@ import { Document, Page, pdfjs } from 'react-pdf'
 import { ChevronLeftIcon, ChevronRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import 'react-pdf/dist/esm/Page/TextLayer.css'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
-import { getImagePath } from '@/utils/helpers'
 
 interface PDFViewerProps {
   pdfUrl: string
