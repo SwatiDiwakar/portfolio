@@ -22,10 +22,9 @@ export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    const basePath = process.env.GITHUB_PAGES === 'true' ? '/portfolio' : ''
-    console.log(`${basePath}/scripts/pdf.worker.min.js`, process.env.GITHUB_PAGES);
+    //const basePath = process.env.GITHUB_PAGES === 'true' ? '/portfolio' : ''
     pdfjs.GlobalWorkerOptions.workerSrc =
-      `${basePath}/scripts/pdf.worker.min.js`;
+      `/portfolio/scripts/pdf.worker.min.js`;
   }, []);
 
   useEffect(() => {
