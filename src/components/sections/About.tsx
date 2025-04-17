@@ -5,6 +5,7 @@ import { useRef } from 'react'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import Button from '@/components/common/Button'
 import { ArrowDownTrayIcon } from '@heroicons/react/24/outline'
+import { getImagePath } from '@/utils/helpers'
 
 export default function About() {
     const aboutRef = useRef<HTMLDivElement>(null)
@@ -66,7 +67,7 @@ export default function About() {
                             className="flex justify-center space-x-6"
                         >
                             <Button
-                                href="/assets/documents/Swati_CV.pdf"
+                                href={getImagePath("/assets/documents/Swati_CV.pdf")}
                                 variant="outline" className='text-xs lg:text-base rounded-2xl'
                                 icon={<ArrowDownTrayIcon className="w-5 h-5 rounded" />}
                             >
