@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     config.resolve.alias.canvas = false
     return config
   },
-  //output: 'export',
+  output: 'export',
   images: {
     unoptimized: true,
   },
