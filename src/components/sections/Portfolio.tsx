@@ -123,7 +123,7 @@ export default function Portfolio() {
 
     useEffect(() => {
         console.log("Selected PDF:", selectedPdf);
-      }, [selectedPdf]);
+    }, [selectedPdf]);
 
     const { items: filteredItems, pdfs: filteredPdfs } = getFilteredItems(activeCategory)
 
@@ -226,7 +226,12 @@ export default function Portfolio() {
                         {filteredPdfs.map((pdf) => (
                             <button
                                 key={pdf.title}
-                                onClick={() => setSelectedPdf(pdf)}
+                                onClick={() => {
+                                    setTimeout(() => {
+                                        console.log("Delayed selection of PDF:", pdf)
+                                        setSelectedPdf(pdf)
+                                    }, 200)
+                                }}
                                 className="bg-primary text-white font-sans hover:bg-primary-dark rounded-xl
                             transition-colors duration-300 py-3 px-6 text-center"
                             >
@@ -322,13 +327,16 @@ export default function Portfolio() {
                 )}
 
                 {/* PDF Viewer Modal */}
-                {selectedPdf && (
+                {selectedPdf !== null ? (
                     <PDFViewer
                         pdfUrl={getImagePath(selectedPdf.url)}
                         title={selectedPdf.title}
-                        onClose={() => setSelectedPdf(null)}
+                        onClose={() => {
+                            console.log('Closing PDF viewer')
+                            setSelectedPdf(null)
+                        }}
                     />
-                )}
+                ) : null}
             </div>
         </section>
     )
