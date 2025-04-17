@@ -12,6 +12,6 @@ export function validateEmail(email: string): boolean {
 }
 
 export function getImagePath(path: string): string {
-    const basePath = process.env.NODE_ENV === 'production' ? '/portfolio' : ''
-    return `${basePath}${path}`
+    const prefix = process.env.NEXT_PUBLIC_BASE_PATH || '';
+    return `${prefix}${path}`
 }

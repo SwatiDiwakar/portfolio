@@ -23,8 +23,9 @@ export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    pdfjs.GlobalWorkerOptions.workerSrc = getImagePath('/scripts/pdf.worker.min.js')
-  }, [])
+    pdfjs.GlobalWorkerOptions.workerSrc =
+      `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/scripts/pdf.worker.min.js`;
+  }, []);
 
   useEffect(() => {
     const calculateScale = () => {

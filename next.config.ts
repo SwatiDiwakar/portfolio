@@ -1,17 +1,23 @@
 import type { NextConfig } from "next";
 
+const isGithubPages = process.env.GITHUB_PAGES === 'true';
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   webpack: (config) => {
     config.resolve.alias.canvas = false
     return config
   },
-  output: 'export',
+  //output: 'export',
   images: {
     unoptimized: true,
   },
-  basePath: process.env.NODE_ENV === 'production' ? '/portfolio' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/portfolio/' : '',
+  basePath: isGithubPages ? '/portfolio' : '',
+  assetPrefix: isGithubPages ? '/portfolio/' : '',
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isGithubPages ? '/portfolio' : '',
+  },
+  trailingSlash: true,
   async headers() {
     return [
       {
