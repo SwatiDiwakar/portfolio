@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
@@ -120,6 +120,10 @@ export default function Portfolio() {
             pdfs: pdfFiles.filter(pdf => pdf.category === category)
         }
     }
+
+    useEffect(() => {
+        console.log("Selected PDF:", selectedPdf);
+      }, [selectedPdf]);
 
     const { items: filteredItems, pdfs: filteredPdfs } = getFilteredItems(activeCategory)
 
