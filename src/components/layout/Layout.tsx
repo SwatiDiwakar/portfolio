@@ -1,3 +1,4 @@
+"use client"
 import { ReactNode } from 'react'
 import Navbar from './NavBar'
 import Footer from './Footer'

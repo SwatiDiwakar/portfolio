@@ -12,6 +12,5 @@ export function validateEmail(email: string): boolean {
 }
 
 export function getImagePath(path: string): string {
-    const basePath = process.env.GITHUB_PAGES === 'true' ? '/portfolio' : ''
-    return `${basePath}${path}`
+    return `${path}`
 }

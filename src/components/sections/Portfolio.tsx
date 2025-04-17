@@ -54,42 +54,42 @@ const portfolioItems: PortfolioItem[] = [
 const pdfFiles: PDFFile[] = [
     {
         title: 'Branding Ideation',
-        url: '/portfolio/assets/documents/Branding.pdf',
+        url: '/assets/documents/Branding.pdf',
         category: 'design'
     },
     {
         title: 'Packaging Design',
-        url: '/portfolio/assets/documents/Packaging.pdf',
+        url: '/assets/documents/Packaging.pdf',
         category: 'design'
     },
     {
         title: 'Brochure Design',
-        url: '/portfolio/assets/documents/Brochure.pdf',
+        url: '/assets/documents/Brochure.pdf',
         category: 'design'
     },
     {
         title: 'Teacher Training',
-        url: '/portfolio/assets/documents/Teacher.pdf',
+        url: '/assets/documents/Teacher.pdf',
         category: 'curriculum'
     },
     {
         title: 'Activity Sheet',
-        url: '/portfolio/assets/documents/Activity_Sheet.pdf',
+        url: '/assets/documents/Activity_Sheet.pdf',
         category: 'curriculum'
     },
     {
         title: 'Activity Booklet',
-        url: '/portfolio/assets/documents/Activity_Booklet.pdf',
+        url: '/assets/documents/Activity_Booklet.pdf',
         category: 'curriculum'
     },
     {
         title: 'MakerFaire Runbook',
-        url: '/portfolio/assets/documents/Runbook_MakerFaire.pdf',
+        url: '/assets/documents/Runbook_MakerFaire.pdf',
         category: 'operations'
     },
     {
         title: 'School Sales Training',
-        url: '/portfolio/assets/documents/School_Sales_Training.pdf',
+        url: '/assets/documents/School_Sales_Training.pdf',
         category: 'sales'
     }
 ]

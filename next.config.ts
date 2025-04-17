@@ -12,11 +12,6 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: isGithubPages ? '/portfolio' : '',
-  assetPrefix: isGithubPages ? '/portfolio/' : '',
-  env: {
-    NEXT_PUBLIC_BASE_PATH: isGithubPages ? '/portfolio' : '',
-  },
   trailingSlash: true,
   async headers() {
     return [

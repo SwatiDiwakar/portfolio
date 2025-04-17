@@ -1,3 +1,4 @@
+"use client"
 import { Roboto_Flex, Playfair_Display, Josefin_Sans } from 'next/font/google'
 import Navbar from '@/components/layout/NavBar'
 import Footer from '@/components/layout/Footer'
