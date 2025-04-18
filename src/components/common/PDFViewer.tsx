@@ -23,7 +23,18 @@ export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    pdfjs.GlobalWorkerOptions.workerSrc = getImagePath('/scripts/pdf.worker.min.js');
+    // Get the base URL for the current environment
+    const isGithubPages = typeof window !== 'undefined' 
+        ? window.location.hostname.includes('github.io') 
+        : false;
+    
+    // Set the worker path with explicit handling for GitHub Pages
+    if (isGithubPages) {
+        pdfjs.GlobalWorkerOptions.workerSrc = '/portfolio/scripts/pdf.worker.min.js';
+    } else {
+        pdfjs.GlobalWorkerOptions.workerSrc = '/scripts/pdf.worker.min.js';
+    }
+    
     console.log("PDF URL being loaded:", pdfUrl);
     console.log("Worker URL being used:", pdfjs.GlobalWorkerOptions.workerSrc);
   }, [pdfUrl]);

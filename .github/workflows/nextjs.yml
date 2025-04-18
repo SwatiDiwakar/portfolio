@@ -79,8 +79,36 @@ jobs:
         run: npm ci --legacy-peer-deps
       - name: Set GITHUB_PAGES env variable
         run: echo "GITHUB_PAGES=true" >> $GITHUB_ENV
+      # New step: Setup PDF worker file
+      - name: Setup PDF worker file
+        run: |
+          # Create scripts directory if it doesn't exist
+          mkdir -p public/scripts
+          mkdir -p public/portfolio/scripts
+          
+          # Download pdf.worker.min.js from CDN if needed
+          if [ ! -f public/scripts/pdf.worker.min.js ]; then
+            echo "Downloading PDF worker script from CDN..."
+            curl -L https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js -o public/scripts/pdf.worker.min.js
+          fi
+          
+          # Copy the worker file to the GitHub Pages structure
+          cp public/scripts/pdf.worker.min.js public/portfolio/scripts/pdf.worker.min.js
+          
+          echo "PDF worker files prepared for deployment"
+
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
+
+      # New step: Verify build output
+      - name: Verify build output structure
+        run: |
+          echo "Checking for PDF worker files in output directory..."
+          find ./out -name "pdf.worker.min.js" -type f
+          
+          echo "Checking built structure for PDF documents..."
+          find ./out -name "*.pdf" -type f
+          
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

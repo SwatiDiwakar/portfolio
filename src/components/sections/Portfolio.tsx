@@ -7,6 +7,10 @@ import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import Button from '@/components/common/Button'
 import { getImagePath } from '@/utils/helpers'
 import PDFViewer from '@/components/common/PDFViewer'
+import dynamic from 'next/dynamic'
+
+// Import the debugger component dynamically to avoid SSR issues
+const PathDebugger = dynamic(() => import('@/components/common/PathDebugger'), { ssr: false })
 
 interface PortfolioItem {
     id: string
@@ -54,42 +58,42 @@ const portfolioItems: PortfolioItem[] = [
 const pdfFiles: PDFFile[] = [
     {
         title: 'Branding Ideation',
-        url: '/assets/documents/Branding.pdf',
+        url: 'assets/documents/Branding.pdf',
         category: 'design'
     },
     {
         title: 'Packaging Design',
-        url: '/assets/documents/Packaging.pdf',
+        url: 'assets/documents/Packaging.pdf',
         category: 'design'
     },
     {
         title: 'Brochure Design',
-        url: '/assets/documents/Brochure.pdf',
+        url: 'assets/documents/Brochure.pdf',
         category: 'design'
     },
     {
         title: 'Teacher Training',
-        url: '/assets/documents/Teacher.pdf',
+        url: 'assets/documents/Teacher.pdf',
         category: 'curriculum'
     },
     {
         title: 'Activity Sheet',
-        url: '/assets/documents/Activity_Sheet.pdf',
+        url: 'assets/documents/Activity_Sheet.pdf',
         category: 'curriculum'
     },
     {
         title: 'Activity Booklet',
-        url: '/assets/documents/Activity_Booklet.pdf',
+        url: 'assets/documents/Activity_Booklet.pdf',
         category: 'curriculum'
     },
     {
         title: 'MakerFaire Runbook',
-        url: '/assets/documents/Runbook_MakerFaire.pdf',
+        url: 'assets/documents/Runbook_MakerFaire.pdf',
         category: 'operations'
     },
     {
         title: 'School Sales Training',
-        url: '/assets/documents/School_Sales_Training.pdf',
+        url: 'assets/documents/School_Sales_Training.pdf',
         category: 'sales'
     }
 ]
@@ -151,6 +155,11 @@ export default function Portfolio() {
                             className="absolute left-0 -bottom-3 h-0.5 bg-primary"
                         />
                     </h2>
+                    
+                    {/* Temporarily add the path debugger - remove after debugging */}
+                    <div className="mt-8">
+                        <PathDebugger />
+                    </div>
                 </motion.div>
 
                 {/* Category Filter */}
