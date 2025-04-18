@@ -1,19 +1,13 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 // Import CSS files
 import 'react-pdf/dist/esm/Page/TextLayer.css'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
 
-// Use proper typing for the dynamically imported components
-interface PDFViewerProps {
-  pdfUrl: string
-  title: string
-  onClose: () => void
-}
-
+// Define a minimal interface for react-pdf modules
 interface ReactPDFModule {
   Document: React.ComponentType<Record<string, unknown>>;
   Page: React.ComponentType<Record<string, unknown>>;
@@ -22,6 +16,13 @@ interface ReactPDFModule {
       workerSrc: string;
     };
   };
+}
+
+// Use proper typing for the dynamically imported components
+interface PDFViewerProps {
+  pdfUrl: string
+  title: string
+  onClose: () => void
 }
 
 export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
@@ -33,6 +34,19 @@ export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
   const [minScale] = useState(0.5)
   const [mounted, setMounted] = useState(false)
   const [pdfComponents, setPdfComponents] = useState<ReactPDFModule | null>(null)
+
+  // Define callbacks using useCallback to avoid dependency issues
+  const changePage = useCallback((offset: number) => {
+    setPageNumber((prev) => Math.min(Math.max(1, prev + offset), numPages))
+  }, [numPages])
+
+  const handleZoomIn = useCallback(() => {
+    setScale(prev => Math.min(prev + 0.25, maxScale))
+  }, [maxScale])
+
+  const handleZoomOut = useCallback(() => {
+    setScale(prev => Math.max(prev - 0.25, minScale))
+  }, [minScale])
 
   // Load PDF components and set up worker
   useEffect(() => {
@@ -107,7 +121,7 @@ export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
 
     window.addEventListener('keydown', handleKeyPress)
     return () => window.removeEventListener('keydown', handleKeyPress)
-  }, [onClose, pageNumber, numPages])
+  }, [onClose, pageNumber, numPages, changePage, handleZoomIn, handleZoomOut])
 
   if (!mounted) {
     return null
@@ -116,18 +130,6 @@ export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
   function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
     setNumPages(numPages)
     setLoading(false)
-  }
-
-  function changePage(offset: number) {
-    setPageNumber((prev) => Math.min(Math.max(1, prev + offset), numPages))
-  }
-
-  const handleZoomIn = () => {
-    setScale(prev => Math.min(prev + 0.25, maxScale))
-  }
-
-  const handleZoomOut = () => {
-    setScale(prev => Math.max(prev - 0.25, minScale))
   }
 
   return (
@@ -179,21 +181,28 @@ export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
 
             {mounted && pdfComponents && (
               <>
-                {/* Using JSX element approach to avoid TypeScript errors */}
-                {React.createElement(pdfComponents.Document, {
-                  file: pdfUrl,
-                  onLoadSuccess: onDocumentLoadSuccess,
-                  loading: null,
-                  error: (
-                    <div className="text-center p-4 text-red-600">
-                      <p className="font-medium">Failed to load PDF</p>
-                      <p className="text-sm mt-1">Please try again later</p>
-                    </div>
-                  ),
-                  children: (
-                    <div className="flex justify-center">
-                      <div className="flex items-center justify-center">
-                        {React.createElement(pdfComponents.Page, {
+                {React.createElement(
+                  pdfComponents.Document as React.ElementType, 
+                  {
+                    file: pdfUrl,
+                    onLoadSuccess: onDocumentLoadSuccess,
+                    loading: null,
+                    error: (
+                      <div className="text-center p-4 text-red-600">
+                        <p className="font-medium">Failed to load PDF</p>
+                        <p className="text-sm mt-1">Please try again later</p>
+                      </div>
+                    )
+                  },
+                  React.createElement(
+                    'div',
+                    { className: "flex justify-center" },
+                    React.createElement(
+                      'div',
+                      { className: "flex items-center justify-center" },
+                      React.createElement(
+                        pdfComponents.Page as React.ElementType,
+                        {
                           pageNumber: pageNumber,
                           scale: scale,
                           loading: null,
@@ -203,11 +212,11 @@ export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
                             </div>
                           ),
                           className: "shadow-lg"
-                        })}
-                      </div>
-                    </div>
+                        }
+                      )
+                    )
                   )
-                })}
+                )}
               </>
             )}
           </div>
