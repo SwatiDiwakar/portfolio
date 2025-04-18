@@ -7,10 +7,10 @@ import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import Button from '@/components/common/Button'
 import { getImagePath } from '@/utils/helpers'
 import PDFViewer from '@/components/common/PDFViewer'
-import dynamic from 'next/dynamic'
+//import dynamic from 'next/dynamic'
 
 // Import the debugger component dynamically to avoid SSR issues
-const PathDebugger = dynamic(() => import('@/components/common/PathDebugger'), { ssr: false })
+// const PathDebugger = dynamic(() => import('@/components/common/PathDebugger'), { ssr: false })
 
 interface PortfolioItem {
     id: string
@@ -157,9 +157,9 @@ export default function Portfolio() {
                     </h2>
                     
                     {/* Temporarily add the path debugger - remove after debugging */}
-                    <div className="mt-8">
+                    {/* <div className="mt-8">
                         <PathDebugger />
-                    </div>
+                    </div> */}
                 </motion.div>
 
                 {/* Category Filter */}
@@ -338,14 +338,28 @@ export default function Portfolio() {
 
                 {/* PDF Viewer Modal */}
                 {selectedPdf !== null ? (
-                    <PDFViewer
-                        pdfUrl={getImagePath(selectedPdf.url)}
-                        title={selectedPdf.title}
-                        onClose={() => {
-                            console.log('Closing PDF viewer');
-                            setSelectedPdf(null);
-                        }}
-                    />
+                    <>
+                        {/* Try the PDF Viewer first */}
+                        <PDFViewer
+                            pdfUrl={getImagePath(selectedPdf.url)}
+                            title={selectedPdf.title}
+                            onClose={() => {
+                                console.log('Closing PDF viewer');
+                                setSelectedPdf(null);
+                            }}
+                        />
+                        {/* Provide a direct link to the PDF as a fallback */}
+                        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-[60]">
+                            <a 
+                                href={getImagePath(selectedPdf.url)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-block px-4 py-2 bg-white text-primary border border-primary rounded-lg shadow-lg hover:bg-primary hover:text-white transition-colors"
+                            >
+                                Open PDF in New Tab
+                            </a>
+                        </div>
+                    </>
                 ) : null}
             </div>
         </section>

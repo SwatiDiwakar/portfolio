@@ -15,6 +15,16 @@ const nextConfig: NextConfig = {
   output: 'export',
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+      {
+        protocol: 'http',
+        hostname: '**',
+      },
+    ],
   },
   trailingSlash: true,
   // Make basePath work correctly for GitHub Pages

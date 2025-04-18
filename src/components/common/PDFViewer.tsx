@@ -1,12 +1,13 @@
 "use client"
 
-import { useState, useEffect } from 'react'
-import { Document, Page, pdfjs } from 'react-pdf'
+import React, { useState, useEffect } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
+
+// Import CSS files
 import 'react-pdf/dist/esm/Page/TextLayer.css'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
-import { getImagePath } from '@/utils/helpers'
 
+// Use proper typing for the dynamically imported components
 interface PDFViewerProps {
   pdfUrl: string
   title: string
@@ -21,24 +22,44 @@ export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
   const [maxScale] = useState(2.0)
   const [minScale] = useState(0.5)
   const [mounted, setMounted] = useState(false)
+  const [pdfComponents, setPdfComponents] = useState<any>(null)
 
+  // Load PDF components and set up worker
   useEffect(() => {
-    // Get the base URL for the current environment
-    const isGithubPages = typeof window !== 'undefined' 
-        ? window.location.hostname.includes('github.io') 
-        : false;
+    if (typeof window === 'undefined') return;
+
+    const loadPdfComponents = async () => {
+      try {
+        setLoading(true);
+        
+        // Dynamically import react-pdf
+        const reactPdfModule = await import('react-pdf');
+        
+        // Get the base URL for the current environment
+        const isGithubPages = window.location.hostname.includes('github.io');
+        
+        // Set the worker path with explicit handling for GitHub Pages
+        const workerSrcPath = isGithubPages 
+          ? '/portfolio/scripts/pdf.worker.min.js'
+          : '/scripts/pdf.worker.min.js';
+        
+        // Set the worker path
+        reactPdfModule.pdfjs.GlobalWorkerOptions.workerSrc = workerSrcPath;
+        
+        // Store the components for later use
+        setPdfComponents(reactPdfModule);
+        
+        console.log("PDF URL being loaded:", pdfUrl);
+        console.log("Worker URL being used:", workerSrcPath);
+      } catch (error) {
+        console.error("Error loading PDF components:", error);
+      }
+    };
     
-    // Set the worker path with explicit handling for GitHub Pages
-    if (isGithubPages) {
-        pdfjs.GlobalWorkerOptions.workerSrc = '/portfolio/scripts/pdf.worker.min.js';
-    } else {
-        pdfjs.GlobalWorkerOptions.workerSrc = '/scripts/pdf.worker.min.js';
-    }
-    
-    console.log("PDF URL being loaded:", pdfUrl);
-    console.log("Worker URL being used:", pdfjs.GlobalWorkerOptions.workerSrc);
+    loadPdfComponents();
   }, [pdfUrl]);
 
+  // Handle window resize
   useEffect(() => {
     const calculateScale = () => {
       const windowWidth = window.innerWidth
@@ -53,10 +74,12 @@ export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  // Set mounted state
   useEffect(() => {
     setMounted(true)
   }, [])
 
+  // Handle keyboard controls
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') {
@@ -97,23 +120,6 @@ export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
     setScale(prev => Math.max(prev - 0.25, minScale))
   }
 
-  /* const handleDownload = async () => {
-    try {
-      const response = await fetch(pdfUrl)
-      const blob = await response.blob()
-      const url = window.URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url
-      a.download = title.replace(/\s+/g, '_') + '.pdf'
-      document.body.appendChild(a)
-      a.click()
-      window.URL.revokeObjectURL(url)
-      document.body.removeChild(a)
-    } catch (error) {
-      console.error('Error downloading PDF:', error)
-    }
-  }
- */
   return (
     // Overlay with click outside to close
     <div
@@ -155,39 +161,45 @@ export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
             }
           `}</style>
           <div className="max-w-4xl mx-auto">
-            {loading && (
+            {(loading || !pdfComponents) && (
               <div className="flex justify-center items-center min-h-[50vh]">
                 <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
               </div>
             )}
 
-            <Document
-              file={getImagePath(pdfUrl)}
-              onLoadSuccess={onDocumentLoadSuccess}
-              loading={null}
-              error={
-                <div className="text-center p-4 text-red-600">
-                  <p className="font-medium">Failed to load PDF</p>
-                  <p className="text-sm mt-1">Please try again later</p>
-                </div>
-              }
-            >
-              <div className="flex justify-center">
-                <div className="flex items-center justify-center">
-                  <Page
-                    pageNumber={pageNumber}
-                    scale={scale}
-                    loading={null}
-                    error={
-                      <div className="text-center p-4 text-red-600">
-                        Failed to load page
+            {mounted && pdfComponents && (
+              <>
+                {/* Using JSX element approach to avoid TypeScript errors */}
+                {React.createElement(pdfComponents.Document, {
+                  file: pdfUrl,
+                  onLoadSuccess: onDocumentLoadSuccess,
+                  loading: null,
+                  error: (
+                    <div className="text-center p-4 text-red-600">
+                      <p className="font-medium">Failed to load PDF</p>
+                      <p className="text-sm mt-1">Please try again later</p>
+                    </div>
+                  ),
+                  children: (
+                    <div className="flex justify-center">
+                      <div className="flex items-center justify-center">
+                        {React.createElement(pdfComponents.Page, {
+                          pageNumber: pageNumber,
+                          scale: scale,
+                          loading: null,
+                          error: (
+                            <div className="text-center p-4 text-red-600">
+                              Failed to load page
+                            </div>
+                          ),
+                          className: "shadow-lg"
+                        })}
                       </div>
-                    }
-                    className="shadow-lg"
-                  />
-                </div>
-              </div>
-            </Document>
+                    </div>
+                  )
+                })}
+              </>
+            )}
           </div>
         </div>
 
@@ -250,18 +262,17 @@ export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
               </div>
             </div>
 
-            {/* Download Button */}
-            {/*<button
-              onClick={handleDownload}
-              className="flex items-center space-x-1 px-3 py-1 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
-              aria-label="Download PDF"
-              title="Download PDF"
+            {/* Direct Link to PDF */}
+            <a
+              href={pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-3 py-1 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
+              aria-label="Open PDF in new tab"
+              title="Open PDF in new tab"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-              <span className="text-sm">Download</span>
-            </button>*/}
+              Open PDF
+            </a>
           </div>
         )}
       </div>
