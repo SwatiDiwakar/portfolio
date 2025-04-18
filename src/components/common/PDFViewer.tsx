@@ -5,6 +5,7 @@ import { Document, Page, pdfjs } from 'react-pdf'
 import { ChevronLeftIcon, ChevronRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import 'react-pdf/dist/esm/Page/TextLayer.css'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
+import { getImagePath } from '@/utils/helpers'
 
 interface PDFViewerProps {
   pdfUrl: string
@@ -22,10 +23,9 @@ export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    //const basePath = process.env.GITHUB_PAGES === 'true' ? '/portfolio' : ''
-    pdfjs.GlobalWorkerOptions.workerSrc =
-      `/scripts/pdf.worker.min.js`;
+    pdfjs.GlobalWorkerOptions.workerSrc = getImagePath('/scripts/pdf.worker.min.js');
     console.log("PDF URL being loaded:", pdfUrl);
+    console.log("Worker URL being used:", pdfjs.GlobalWorkerOptions.workerSrc);
   }, [pdfUrl]);
 
   useEffect(() => {

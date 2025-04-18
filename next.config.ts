@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 
 const isGithubPages = process.env.GITHUB_PAGES === 'true';
 
+console.log(`Building for GitHub Pages: ${isGithubPages ? 'YES' : 'NO'}`);
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   webpack: (config) => {
@@ -13,6 +15,8 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
+  ...(isGithubPages ? { basePath: '/portfolio' } : {}),
+  ...(isGithubPages ? { assetPrefix: '/portfolio' } : {}),
   async headers() {
     return [
       {
@@ -36,6 +40,9 @@ const nextConfig: NextConfig = {
         ]
       }
     ]
+  },
+  env: {
+    GITHUB_PAGES: isGithubPages ? 'true' : 'false',
   }
 };
 

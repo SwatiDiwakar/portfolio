@@ -228,9 +228,10 @@ export default function Portfolio() {
                                 key={pdf.title}
                                 onClick={() => {
                                     setTimeout(() => {
-                                        console.log("Delayed selection of PDF:", pdf)
-                                        setSelectedPdf(pdf)
-                                    }, 200)
+                                        console.log("Delayed selection of PDF:", pdf);
+                                        console.log("PDF URL with path:", getImagePath(pdf.url));
+                                        setSelectedPdf(pdf);
+                                    }, 200);
                                 }}
                                 className="bg-primary text-white font-sans hover:bg-primary-dark rounded-xl
                             transition-colors duration-300 py-3 px-6 text-center"
@@ -332,8 +333,8 @@ export default function Portfolio() {
                         pdfUrl={getImagePath(selectedPdf.url)}
                         title={selectedPdf.title}
                         onClose={() => {
-                            console.log('Closing PDF viewer')
-                            setSelectedPdf(null)
+                            console.log('Closing PDF viewer');
+                            setSelectedPdf(null);
                         }}
                     />
                 ) : null}

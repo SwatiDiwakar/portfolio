@@ -12,5 +12,13 @@ export function validateEmail(email: string): boolean {
 }
 
 export function getImagePath(path: string): string {
-    return `${path}`
+    const isGithubPages = typeof window !== 'undefined' 
+        ? window.location.hostname.includes('github.io') 
+        : process.env.GITHUB_PAGES === 'true'
+    
+    const prefix = isGithubPages ? '/portfolio' : ''
+    
+    const normalizedPath = path.startsWith('/') ? path : `/${path}`
+    
+    return `${prefix}${normalizedPath}`
 }
