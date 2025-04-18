@@ -14,6 +14,16 @@ interface PDFViewerProps {
   onClose: () => void
 }
 
+interface ReactPDFModule {
+  Document: React.ComponentType<Record<string, unknown>>;
+  Page: React.ComponentType<Record<string, unknown>>;
+  pdfjs: {
+    GlobalWorkerOptions: {
+      workerSrc: string;
+    };
+  };
+}
+
 export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
   const [numPages, setNumPages] = useState<number>(0)
   const [pageNumber, setPageNumber] = useState<number>(1)
@@ -22,7 +32,7 @@ export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
   const [maxScale] = useState(2.0)
   const [minScale] = useState(0.5)
   const [mounted, setMounted] = useState(false)
-  const [pdfComponents, setPdfComponents] = useState<any>(null)
+  const [pdfComponents, setPdfComponents] = useState<ReactPDFModule | null>(null)
 
   // Load PDF components and set up worker
   useEffect(() => {
@@ -47,7 +57,7 @@ export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
         reactPdfModule.pdfjs.GlobalWorkerOptions.workerSrc = workerSrcPath;
         
         // Store the components for later use
-        setPdfComponents(reactPdfModule);
+        setPdfComponents(reactPdfModule as ReactPDFModule);
         
         console.log("PDF URL being loaded:", pdfUrl);
         console.log("Worker URL being used:", workerSrcPath);
