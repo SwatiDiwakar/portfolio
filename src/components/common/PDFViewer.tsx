@@ -162,7 +162,7 @@ export default function PDFViewer({ pdfUrl, title, onClose }: PDFViewerProps) {
             )}
 
             <Document
-              file={pdfUrl}
+              file={getImagePath(pdfUrl)}
               onLoadSuccess={onDocumentLoadSuccess}
               loading={null}
               error={
