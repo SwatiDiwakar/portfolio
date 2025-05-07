@@ -14,6 +14,7 @@ interface BaseButtonProps {
     icon?: ReactNode
     children: ReactNode
     className?: string
+    target?: string
 }
 
 // Props for button element
@@ -54,6 +55,7 @@ const Button = ({
     icon,
     children,
     className,
+    target,
     ...props
 }: ButtonProps | AnchorProps) => {
     const combinedClassName = cn(
@@ -70,14 +72,18 @@ const Button = ({
 
     if ('href' in props) {
         const { href, ...linkProps } = props as AnchorProps
+
         return (
-            <Link
-                href={href}
-                className={combinedClassName}
-                {...linkProps}
-            >
-                {iconElement}
-                {children}
+            <Link href={href} passHref legacyBehavior>
+                <a
+                    className={combinedClassName}
+                    target={target}
+                    rel={target ? 'noopener noreferrer' : undefined}
+                    {...linkProps}
+                >
+                    {iconElement}
+                    {children}
+                </a>
             </Link>
         )
     }

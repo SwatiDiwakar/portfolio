@@ -155,7 +155,7 @@ export default function Portfolio() {
                             className="absolute left-0 -bottom-3 h-0.5 bg-primary"
                         />
                     </h2>
-                    
+
                     {/* Temporarily add the path debugger - remove after debugging */}
                     {/* <div className="mt-8">
                         <PathDebugger />
@@ -233,20 +233,13 @@ export default function Portfolio() {
                 {filteredPdfs.length > 0 && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center text-center">
                         {filteredPdfs.map((pdf) => (
-                            <button
+                            <Button
                                 key={pdf.title}
-                                onClick={() => {
-                                    setTimeout(() => {
-                                        console.log("Delayed selection of PDF:", pdf);
-                                        console.log("PDF URL with path:", getImagePath(pdf.url));
-                                        setSelectedPdf(pdf);
-                                    }, 200);
-                                }}
-                                className="bg-primary text-white font-sans hover:bg-primary-dark rounded-xl
+                                href={getImagePath(pdf.url)}
+                                type='button'
+                                variant="outline" className="bg-primary text-white font-sans hover:bg-primary-dark rounded-xl
                             transition-colors duration-300 py-3 px-6 text-center"
-                            >
-                                {pdf.title}
-                            </button>
+                            target='blank'>{pdf.title}</Button>
                         ))}
                     </div>
                 )}
@@ -350,7 +343,7 @@ export default function Portfolio() {
                         />
                         {/* Provide a direct link to the PDF as a fallback */}
                         <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-[60]">
-                            <a 
+                            <a
                                 href={getImagePath(selectedPdf.url)}
                                 target="_blank"
                                 rel="noopener noreferrer"
